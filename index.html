@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eFootball Pro Zone | Buy & Boost Players</title>
+    <title>eFootball Pro Store | Elite Superstar Player Injection</title>
     <!-- Google Fonts & FontAwesome Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -23,21 +23,21 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <h1>Boost Your Ultimate Team</h1>
-        <p>Purchase elite players and transfer them directly into your Konami ID account with maximum ratings.</p>
+        <h1>Superstar Player Injection</h1>
+        <p>Select your favorite icons, complete checkout, and boost your Konami ID squad instantly.</p>
         <div class="hero-stats">
             <div class="stat-item">
                 <i class="fa-solid fa-bolt"></i>
                 <div>
                     <h4>Instant Delivery</h4>
-                    <p>Processed within 5 mins</p>
+                    <p>Live Inbox Transfer</p>
                 </div>
             </div>
             <div class="stat-item">
                 <i class="fa-solid fa-lock"></i>
                 <div>
                     <h4>100% Safe</h4>
-                    <p>Encrypted Konami Login</p>
+                    <p>Encrypted Session</p>
                 </div>
             </div>
         </div>
@@ -46,14 +46,15 @@
     <!-- Main Container -->
     <main class="main-container">
         
-        <!-- Step 1: Select Players -->
+        <!-- Step 1: Select Players (Extended Roster) -->
         <section class="section-box">
-            <h2><span class="step-num">1</span> Choose Your Player ($3.00 Each)</h2>
+            <h2><span class="step-num">1</span> Choose Your Superstar Player ($3.00 Each)</h2>
             <div class="player-grid" id="playerGrid">
-                <!-- Player Card 1 -->
+                
+                <!-- 1. Messi -->
                 <div class="player-card" data-id="1" data-name="L. Messi (Epic Booster)" data-price="3">
                     <div class="player-ovr">105</div>
-                    <img src="https://imgs.search.brave.com/placeholder.svg" alt="Lionel Messi" class="player-img">
+                    <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=300&q=80" alt="Lionel Messi" class="player-img">
                     <div class="player-info">
                         <h3>L. Messi</h3>
                         <p class="position">CF / RWF • Epic Booster</p>
@@ -62,10 +63,10 @@
                     <button class="select-btn">Select Player</button>
                 </div>
 
-                <!-- Player Card 2 -->
+                <!-- 2. Ronaldo -->
                 <div class="player-card" data-id="2" data-name="C. Ronaldo (Epic Booster)" data-price="3">
                     <div class="player-ovr">105</div>
-                    <img src="https://imgs.search.brave.com/placeholder.svg" alt="Cristiano Ronaldo" class="player-img">
+                    <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=300&q=80" alt="Cristiano Ronaldo" class="player-img">
                     <div class="player-info">
                         <h3>C. Ronaldo</h3>
                         <p class="position">CF • Epic Booster</p>
@@ -74,10 +75,10 @@
                     <button class="select-btn">Select Player</button>
                 </div>
 
-                <!-- Player Card 3 -->
+                <!-- 3. Neymar Jr -->
                 <div class="player-card" data-id="3" data-name="Neymar Jr (Show Time)" data-price="3">
                     <div class="player-ovr">104</div>
-                    <img src="https://imgs.search.brave.com/placeholder.svg" alt="Neymar Jr" class="player-img">
+                    <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=300&q=80" alt="Neymar Jr" class="player-img">
                     <div class="player-info">
                         <h3>Neymar Jr</h3>
                         <p class="position">LWF / AMF • Show Time</p>
@@ -86,10 +87,10 @@
                     <button class="select-btn">Select Player</button>
                 </div>
 
-                <!-- Player Card 4 -->
+                <!-- 4. Bellingham -->
                 <div class="player-card" data-id="4" data-name="J. Bellingham (Big Time)" data-price="3">
                     <div class="player-ovr">104</div>
-                    <img src="https://imgs.search.brave.com/placeholder.svg" alt="Jude Bellingham" class="player-img">
+                    <img src="https://images.unsplash.com/photo-1551958219-acbc608c6377?auto=format&fit=crop&w=300&q=80" alt="Jude Bellingham" class="player-img">
                     <div class="player-info">
                         <h3>J. Bellingham</h3>
                         <p class="position">CMF / AMF • Big Time</p>
@@ -97,81 +98,90 @@
                     </div>
                     <button class="select-btn">Select Player</button>
                 </div>
-            </div>
-        </section>
 
-        <!-- Order Summary & Payment trigger -->
-        <section class="section-box checkout-summary">
-            <h2><span class="step-num">2</span> Order Summary & Payment</h2>
-            <div class="summary-box">
-                <div class="selected-display">
-                    <span id="selectedPlayerText">No player selected yet</span>
-                    <span id="selectedPlayerPrice">$0.00</span>
-                </div>
-                <button id="payBtn" class="pay-btn" disabled>Pay $3.00 via M-Pesa / Card</button>
-            </div>
-        </section>
-
-        <!-- Step 3: Konami Login Box (LOCKED UNTIL PAYMENT) -->
-        <section class="section-box">
-            <h2><span class="step-num">3</span> Konami Account Link <span id="lockStatus" class="lock-badge locked"><i class="fa-solid fa-lock"></i> Locked</span></h2>
-            
-            <div id="konamiBoxWrapper" class="locked-box-container">
-                <!-- Overlay message when locked -->
-                <div id="lockOverlay" class="lock-overlay">
-                    <i class="fa-solid fa-lock-keyhole"></i>
-                    <p>Complete your $3.00 payment above to unlock Konami account linking & player injection.</p>
+                <!-- 5. Mbappé -->
+                <div class="player-card" data-id="5" data-name="K. Mbappé (Show Time)" data-price="3">
+                    <div class="player-ovr">105</div>
+                    <img src="https://images.unsplash.com/photo-1560272564-c83b66b1ad12?auto=format&fit=crop&w=300&q=80" alt="Kylian Mbappé" class="player-img">
+                    <div class="player-info">
+                        <h3>K. Mbappé</h3>
+                        <p class="position">CF / LWF • Show Time</p>
+                        <div class="price-tag">$3.00</div>
+                    </div>
+                    <button class="select-btn">Select Player</button>
                 </div>
 
-                <!-- Actual Login Form -->
-                <form id="konamiForm" class="konami-form">
-                    <p class="form-instruction">Enter your Konami ID details securely. Our system will inject the selected player directly into your inbox/squad.</p>
-                    
-                    <div class="input-group">
-                        <label><i class="fa-solid fa-envelope"></i> Konami ID / Email</label>
-                        <input type="email" id="konamiEmail" placeholder="your-email@konami.net" required>
+                <!-- 6. De Bruyne -->
+                <div class="player-card" data-id="6" data-name="K. De Bruyne (Epic Booster)" data-price="3">
+                    <div class="player-ovr">103</div>
+                    <img src="https://images.unsplash.com/photo-1526232761682-d26e03ac148e?auto=format&fit=crop&w=300&q=80" alt="Kevin De Bruyne" class="player-img">
+                    <div class="player-info">
+                        <h3>K. De Bruyne</h3>
+                        <p class="position">AMF / CMF • Epic Booster</p>
+                        <div class="price-tag">$3.00</div>
                     </div>
+                    <button class="select-btn">Select Player</button>
+                </div>
 
-                    <div class="input-group">
-                        <label><i class="fa-solid fa-key"></i> Password</label>
-                        <input type="password" id="konamiPass" placeholder="••••••••••••" required>
+                <!-- 7. Vinícius Jr -->
+                <div class="player-card" data-id="7" data-name="Vinícius Jr (Big Time)" data-price="3">
+                    <div class="player-ovr">104</div>
+                    <img src="https://images.unsplash.com/photo-1518091043644-c1d4457512c6?auto=format&fit=crop&w=300&q=80" alt="Vinícius Jr" class="player-img">
+                    <div class="player-info">
+                        <h3>Vinícius Jr</h3>
+                        <p class="position">LWF • Big Time</p>
+                        <div class="price-tag">$3.00</div>
                     </div>
+                    <button class="select-btn">Select Player</button>
+                </div>
 
-                    <div class="input-group">
-                        <label><i class="fa-solid fa-gamepad"></i> Platform</label>
-                        <select id="platformSelect" required>
-                            <option value="">Select Platform</option>
-                            <option value="android">Android / iOS (Mobile)</option>
-                            <option value="playstation">PlayStation Network</option>
-                            <option value="xbox">Xbox Live</option>
-                            <option value="steam">Steam (PC)</option>
-                        </select>
+                <!-- 8. Haaland -->
+                <div class="player-card" data-id="8" data-name="E. Haaland (Show Time)" data-price="3">
+                    <div class="player-ovr">104</div>
+                    <img src="https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?auto=format&fit=crop&w=300&q=80" alt="Erling Haaland" class="player-img">
+                    <div class="player-info">
+                        <h3>E. Haaland</h3>
+                        <p class="position">CF • Show Time</p>
+                        <div class="price-tag">$3.00</div>
                     </div>
+                    <button class="select-btn">Select Player</button>
+                </div>
 
-                    <button type="submit" id="submitLinkBtn" class="submit-link-btn">
-                        <i class="fa-solid fa-cloud-arrow-down"></i> Inject Player to Account
-                    </button>
-                </form>
-            </div>
-        </section>
+                <!-- 9. Ronaldinho -->
+                <div class="player-card" data-id="9" data-name="Ronaldinho (Epic Legend)" data-price="3">
+                    <div class="player-ovr">106</div>
+                    <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=300&q=80" alt="Ronaldinho" class="player-img">
+                    <div class="player-info">
+                        <h3>Ronaldinho</h3>
+                        <p class="position">AMF / LWF • Epic Legend</p>
+                        <div class="price-tag">$3.00</div>
+                    </div>
+                    <button class="select-btn">Select Player</button>
+                </div>
 
-    </main>
+                <!-- 10. Cruyff -->
+                <div class="player-card" data-id="10" data-name="J. Cruyff (Epic Legend)" data-price="3">
+                    <div class="player-ovr">105</div>
+                    <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=300&q=80" alt="Johan Cruyff" class="player-img">
+                    <div class="player-info">
+                        <h3>J. Cruyff</h3>
+                        <p class="position">SS / AMF • Epic Legend</p>
+                        <div class="price-tag">$3.00</div>
+                    </div>
+                    <button class="select-btn">Select Player</button>
+                </div>
 
-    <!-- Success Modal Popup -->
-    <div id="successModal" class="modal">
-        <div class="modal-content">
-            <i class="fa-solid fa-circle-check success-icon"></i>
-            <h2>Player Injected Successfully!</h2>
-            <p>Your Konami ID has been updated. Log into eFootball to check your player inventory.</p>
-            <button id="closeModalBtn" class="close-modal-btn">Done</button>
-        </div>
-    </div>
+                <!-- 11. Maldini -->
+                <div class="player-card" data-id="11" data-name="P. Maldini (Epic Defensive)" data-price="3">
+                    <div class="player-ovr">105</div>
+                    <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=300&q=80" alt="Paolo Maldini" class="player-img">
+                    <div class="player-info">
+                        <h3>P. Maldini</h3>
+                        <p class="position">CB / LB • Epic Legend</p>
+                        <div class="price-tag">$3.00</div>
+                    </div>
+                    <button class="select-btn">Select Player</button>
+                </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 eFootball Pro Zone. Not affiliated with Konami Digital Entertainment.</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+                <!-- 12. Saliba -->
+                <div class="player-card" data-id="12" data-name="W. Saliba (Trending)" data-price="3">
